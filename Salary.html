@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Government Salary Calculator</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI",Arial,sans-serif;
+}
+
+body{
+
+background:#0f172a;
+color:white;
+padding:20px;
+
+}
+
+.container{
+
+max-width:700px;
+margin:auto;
+background:#1e293b;
+border-radius:18px;
+padding:25px;
+box-shadow:0 15px 40px rgba(0,0,0,.35);
+
+}
+
+h1{
+
+text-align:center;
+margin-bottom:25px;
+font-size:30px;
+
+}
+
+input,
+select{
+
+width:100%;
+padding:14px;
+margin-bottom:15px;
+border:none;
+border-radius:12px;
+background:#334155;
+color:white;
+font-size:16px;
+outline:none;
+
+}
+
+input:focus,
+select:focus{
+
+background:#475569;
+
+}
+
+.button-grid{
+
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+
+}
+
+button{
+
+padding:14px;
+border:none;
+border-radius:12px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+transition:.2s;
+
+}
+
+button:hover{
+
+transform:translateY(-2px);
+
+}
+
+button:active{
+
+transform:scale(.98);
+
+}
+
+.hitung{
+
+background:#2563eb;
+color:white;
+
+}
+
+.salin{
+
+background:#16a34a;
+color:white;
+
+}
+
+.riwayat{
+
+background:#7c3aed;
+color:white;
+
+}
+
+.salary{
+
+background:#ea580c;
+color:white;
+
+}
+
+.hapus{
+
+background:#dc2626;
+color:white;
+
+}
+
+pre{
+
+margin-top:20px;
+background:#020617;
+padding:18px;
+border-radius:12px;
+color:#22c55e;
+font-size:15px;
+white-space:pre-wrap;
+overflow:auto;
+line-height:1.6;
+
+}
+
+.card{
+
+margin-top:20px;
+background:#111827;
+padding:18px;
+border-radius:12px;
+display:none;
+
+}
+
+.card h2{
+
+text-align:center;
+margin-bottom:15px;
+
+}
+
+.list{
+
+display:flex;
+justify-content:space-between;
+padding:10px 0;
+border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.total{
+
+margin-top:15px;
+padding-top:15px;
+border-top:2px solid #444;
+font-weight:bold;
+font-size:17px;
+
+}
+
+@media(max-width:600px){
+
+body{
+
+padding:10px;
+
+}
+
+.container{
+
+padding:18px;
+
+}
+
+h1{
+
+font-size:24px;
+
+}
+
+.button-grid{
+
+grid-template-columns:1fr;
+
+}
+
+button{
+
+width:100%;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>💼 Government Salary Calculator</h1>
+
+<input
+type="text"
+id="nama"
+placeholder="Nama Staff">
+
+<select id="rank">
+
+<!-- Bagian 2 akan berisi semua option rank -->
+
+</select>
+
+<input
+type="number"
+id="duty"
+placeholder="Duty Time (Menit)">
+
+<div class="button-grid">
+
+<button class="hitung" onclick="bukaLogin()">💼 Hitung Gaji</button>
+
+<button class="salin" onclick="salinOutput()">📋 Salin Output</button>
+
+<button class="riwayat" onclick="toggleRiwayat()">📜 Riwayat</button>
+
+<button class="salary" onclick="cekSalary()">💰 Cek Salary</button>
+
+<button class="hapus" onclick="hapusRiwayat()">🗑 Hapus Riwayat</button>
+
+</div>
+
+<pre id="hasil"></pre>
+
+<div
+id="riwayat"
+class="card">
+</div>
+
+<div
+id="salaryList"
+class="card">
+</div>
+
+<div id="loginModal" class="card" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);max-width:400px;width:90%;z-index:9999;">
+
+<h2>🔐 Login</h2>
+
+<input type="text" id="username" placeholder="Username">
+
+<input type="password" id="password" placeholder="Password">
+
+<div class="button-grid">
+<button onclick="login()">Login</button>
+<button onclick="tutupLogin()">Batal</button>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+// ==============================
+// DATA RANK GOVERNMENT
+// ==============================
+
+const rankData = [
+["PRESIDENT",30000],
+["VICE PRESIDENT",28500],
+["ATTORNEY GENERAL",27000],
+["CHIEF OF STAFF",25500],
+["SENIOR EXECUTIVE SERVICE",24000],
+["COUNTY COMMISIONER",22500],
+["DEPUTY COMMISIONER",21000],
+["SENIOR STAFF",19500],
+["JUNIOR STAFF",18000],
+["INTERNSHIP",16500],
+
+["PRESIDENT OF SENATE",27000],
+["SPEAKER OF THE HOUSE",25500],
+["SENATORS",24000],
+["REPRESENTATIVE",22500],
+["CHIEF JUSTICE",21000],
+["COURT OF APPEAL JUDGE",19500],
+
+["GOVERNOR",26500],
+["LEUTNANT GOVERNOR",25500],
+["SECRETARY OF STATE",24500],
+["MAYOR",23500],
+["VICE MAYOR",22500],
+
+["MANAGEMENT GUARD",25000],
+["COMMANDING OFFICER",23500],
+["SECRET SERVICE",22000],
+["SENIOR GUARD",20500],
+["GOVERNMENT GUARD",19000],
+["TRAINEE GUARD",17500]
+];
+
+const select=document.getElementById("rank");
+
+rankData.forEach(rank=>{
+
+let option=document.createElement("option");
+
+option.value=rank[1];
+
+option.textContent=rank[0];
+
+select.appendChild(option);
+
+});
+
+// ==============================
+// FORMAT UANG
+// ==============================
+
+function uang(nilai){
+
+return "$"+nilai.toLocaleString("en-US",{
+
+minimumFractionDigits:2,
+maximumFractionDigits:2
+
+});
+
+}
+
+// ==============================
+// HITUNG GAJI
+// ==============================
+
+function hitung(){
+
+let nama=document.getElementById("nama").value.trim();
+
+if(nama==""){
+
+alert("Masukkan nama staff.");
+
+return;
+
+}
+
+let duty=Math.round(Number(document.getElementById("duty").value));
+
+let rank=document.getElementById("rank");
+
+let rankNama=rank.options[rank.selectedIndex].text;
+
+let gajiPokok=Number(rank.value);
+
+let persen=0;
+
+if(duty>=800){
+
+persen=1;
+
+}else if(duty>=700){
+
+persen=0.65;
+
+}else if(duty>=600){
+
+persen=0.55;
+
+}else if(duty>=500){
+
+persen=0.45;
+
+}else if(duty>=400){
+
+persen=0.35;
+
+}else if(duty>=300){
+
+persen=0.25;
+
+}else if(duty>=200){
+
+persen=0.15;
+
+}else if(duty>=100){
+
+persen=0.05;
+
+}else{
+
+persen=0;
+
+}
+
+let gaji=gajiPokok*persen;
+
+let tunjangan=0;
+
+if(duty>=800){
+
+tunjangan=5000;
+
+}
+
+let total=gaji+tunjangan;
+
+let output="```=== Salary ===```\n\n";
+
+output+="```\n";
+
+output+=`Nama Staff : ${nama}
+Rank       : ${rankNama}
+Duty Time  : ${duty} Menit
+
+Gaji :
+- Gaji Pokok ${uang(gaji)}
+`;
+
+if(duty>=800){
+
+output+=`- Tunjangan Makan, Minum, Kesehatan & Bensin ${uang(tunjangan)}
+`;
+
+}
+
+output+=`
+Total Gaji : ${uang(total)}
+`;
+
+output+="```";
+
+document.getElementById("hasil").textContent=output;
+
+// Fungsi ini akan dibuat di Bagian 3
+
+simpanRiwayat(nama,rankNama,duty,total);
+
+}
+
+// ======================================
+// LOCAL STORAGE RIWAYAT
+// ======================================
+
+function simpanRiwayat(nama, rank, duty, total){
+
+    let data = JSON.parse(localStorage.getItem("salaryHistory")) || [];
+
+    data.push({
+        nama: nama,
+        rank: rank,
+        duty: duty,
+        total: total
+    });
+
+    data.sort((a,b)=>b.duty-a.duty);
+
+    localStorage.setItem("salaryHistory", JSON.stringify(data));
+
+}
+
+// ======================================
+// TAMPILKAN RIWAYAT
+// ======================================
+
+function toggleRiwayat(){
+
+    let box = document.getElementById("riwayat");
+
+    if(box.style.display=="block"){
+
+        box.style.display="none";
+        return;
+
+    }
+
+    let data = JSON.parse(localStorage.getItem("salaryHistory")) || [];
+
+    let html = "<h2>📜 Riwayat Salary</h2>";
+
+    let totalSemua = 0;
+
+    if(data.length==0){
+
+        html += "<center>Belum ada riwayat.</center>";
+
+    }else{
+
+        data.forEach(item=>{
+
+            totalSemua += item.total;
+
+            html += `
+            <div class="list">
+
+                <div>
+
+                <b>${item.nama}</b><br>
+
+                ${item.rank}<br>
+
+                Duty : ${item.duty} Menit
+
+                </div>
+
+                <div>
+
+                ${uang(item.total)}
+
+                </div>
+
+            </div>
+            `;
+
+        });
+
+        html += `
+        <div class="total">
+
+        👥 Total Staff : ${data.length}<br><br>
+
+        💰 Total Seluruh Gaji : ${uang(totalSemua)}
+
+        </div>
+        `;
+
+    }
+
+    box.innerHTML = html;
+
+    box.style.display="block";
+
+}
+
+// ======================================
+// HAPUS RIWAYAT
+// ======================================
+
+function hapusRiwayat(){
+
+    if(confirm("Hapus seluruh riwayat?")){
+
+        localStorage.removeItem("salaryHistory");
+
+        document.getElementById("riwayat").style.display="none";
+
+    }
+
+}
+
+// ======================================
+// SALIN OUTPUT
+// ======================================
+
+function salinOutput(){
+
+    let text = document.getElementById("hasil").textContent;
+
+    if(text==""){
+
+        alert("Belum ada output.");
+
+        return;
+
+    }
+
+    let textarea = document.createElement("textarea");
+
+    textarea.value = text;
+
+    document.body.appendChild(textarea);
+
+    textarea.select();
+
+    document.execCommand("copy");
+
+    document.body.removeChild(textarea);
+
+    alert("Output berhasil disalin.");
+
+}
+
+// ======================================
+// CEK SALARY
+// ======================================
+
+function cekSalary(){
+
+    const box=document.getElementById("salaryList");
+
+    if(box.style.display=="block"){
+
+        box.style.display="none";
+        return;
+
+    }
+
+    let html="<h2>💰 Government Salary List</h2>";
+
+    rankData.forEach(item=>{
+
+        html+=`
+        <div class="list">
+            <span>${item[0]}</span>
+            <b>${uang(item[1])}</b>
+        </div>
+        `;
+
+    });
+
+    html+=`
+    <div class="total">
+
+    👥 Total Rank : ${rankData.length}
+
+    </div>
+    `;
+
+    box.innerHTML=html;
+
+    box.style.display="block";
+
+}
+
+// ======================================
+// TUTUP PANEL SAAT MEMBUKA PANEL LAIN
+// ======================================
+
+function tutupPanel(){
+
+    document.getElementById("riwayat").style.display="none";
+
+    document.getElementById("salaryList").style.display="none";
+
+}
+
+// ======================================
+// AGAR PANEL TIDAK BERSAMAAN
+// ======================================
+
+const tombolRiwayat=document.querySelector(".riwayat");
+
+tombolRiwayat.onclick=function(){
+
+    document.getElementById("salaryList").style.display="none";
+
+    toggleRiwayat();
+
+}
+
+const tombolSalary=document.querySelector(".salary");
+
+tombolSalary.onclick=function(){
+
+    document.getElementById("riwayat").style.display="none";
+
+    cekSalary();
+
+}
+
+const USERNAME = "GOV";
+const PASSWORD = "State26";
+
+function bukaLogin(){
+
+    document.getElementById("loginModal").style.display="block";
+
+}
+
+function tutupLogin(){
+
+    document.getElementById("loginModal").style.display="none";
+
+}
+
+function login(){
+
+    let user = document.getElementById("username").value.trim();
+    let pass = document.getElementById("password").value;
+
+    if(user === USERNAME && pass === PASSWORD){
+
+        document.getElementById("loginModal").style.display="none";
+
+        hitung();
+
+    }else{
+
+        alert("Username atau Password salah.");
+
+    }
+
+}
+
+
+// ======================================
+// ENTER = HITUNG GAJI
+// ======================================
+
+document.addEventListener("keydown",function(e){
+
+    if(e.key==="Enter"){
+
+        hitung();
+
+    }
+
+});
+
+// ======================================
+// LOAD DATA
+// ======================================
+
+window.onload=function(){
+
+    document.getElementById("hasil").textContent="";
+
+    document.getElementById("riwayat").style.display="none";
+
+    document.getElementById("salaryList").style.display="none";
+
+}
+
+
+</script>
+
+</body>
+</html>
