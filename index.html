@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Penal Code</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+background:#161b22;
+color:#fff;
+}
+
+.container{
+width:95%;
+max-width:1400px;
+margin:auto;
+padding:20px;
+}
+
+.header{
+text-align:center;
+margin-bottom:20px;
+}
+
+.logo{
+width:120px;
+margin-bottom:10px;
+}
+
+.header h1{
+font-size:40px;
+font-weight:700;
+}
+
+.header p{
+color:#9ca3af;
+}
+
+.search-box{
+display:flex;
+gap:10px;
+margin:20px 0;
+flex-wrap:wrap;
+}
+
+.search-box input{
+
+flex:1;
+padding:12px;
+background:#21262d;
+border:none;
+outline:none;
+color:white;
+border-radius:8px;
+
+}
+
+.search-box select{
+
+padding:12px;
+background:#21262d;
+border:none;
+outline:none;
+color:white;
+border-radius:8px;
+
+}
+
+.table-box{
+
+overflow:auto;
+border-radius:10px;
+
+}
+
+table{
+
+width:100%;
+border-collapse:collapse;
+background:#20262e;
+
+}
+
+thead{
+
+background:#0d1117;
+
+}
+
+th{
+
+padding:15px;
+text-align:left;
+
+}
+
+td{
+
+padding:14px;
+
+border-top:1px solid #30363d;
+
+}
+
+tbody tr:hover{
+
+background:#2d333b;
+
+}
+
+.badge{
+
+padding:6px 10px;
+
+border-radius:6px;
+
+font-size:13px;
+
+font-weight:bold;
+
+}
+
+.jail{
+
+background:#b91c1c;
+
+}
+
+.ticket{
+
+background:#15803d;
+
+}
+
+.impound{
+
+background:#ea580c;
+
+}
+
+.copy{
+
+background:#2563eb;
+
+color:white;
+
+border:none;
+
+padding:8px 14px;
+
+border-radius:6px;
+
+cursor:pointer;
+
+}
+
+.copy:hover{
+
+background:#1d4ed8;
+
+}
+
+.footer{
+
+margin-top:20px;
+
+text-align:center;
+
+color:#aaa;
+
+font-size:14px;
+
+}
+
+@media(max-width:768px){
+
+.logo{
+
+width:80px;
+
+}
+
+.header h1{
+
+font-size:28px;
+
+}
+
+table{
+
+font-size:13px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<h1>PENAL CODE</h1>
+
+<p>Form Legist To Justice</p>
+
+</div>
+
+<div class="search-box">
+
+<input id="search" placeholder="Search Code / Violation...">
+
+<select id="category">
+
+<option value="ALL">All</option>
+<option value="HSC">HSC</option>
+<option value="PEN">PEN</option>
+<option value="VEH">VEH</option>
+
+</select>
+
+</div>
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Code</th>
+<th>Violation</th>
+<th>Jailtime</th>
+<th>Fine</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="tbody">
+
+<!-- DATA -->
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="footer">
+
+SASG Penal Code © 2026
+
+</div>
+
+</div>
+
+<script>
+
+const data=[
+{
+code:"HSC 212(a)",
+violation:"Personal use of Marijuana (less than 5kg)",
+jailtime:"🔒 10",
+fine:1415,
+action:""
+},
+{
+code:"HSC 212(b)",
+violation:"Personal use of Marijuana (more than 5kg)",
+jailtime:"🔒 20",
+fine:2209,
+action:""
+},
+{
+code:"HSC 212(c)",
+violation:"Personal use of Cocaine (less than 5kg)",
+jailtime:"🔒 10",
+fine:711,
+action:""
+},
+{
+code:"HSC 212(d)",
+violation:"Personal use of Cocaine (more than 5kg)",
+jailtime:"🔒 20",
+fine:1814,
+action:""
+},
+{
+code:"HSC 212(e)",
+violation:"Personal use of Heroin (less than 5kg)",
+jailtime:"🔒 20",
+fine:2063,
+action:""
+},
+{
+code:"HSC 212(f)",
+violation:"Personal use of Heroin (more than 5kg)",
+jailtime:"🔒 30",
+fine:1959,
+action:""
+},
+{
+code:"HSC 212(g)",
+violation:"Personal use of Steroid (less than 5kg)",
+jailtime:"🔒 20",
+fine:1171,
+action:""
+},
+{
+code:"HSC 212(h)",
+violation:"Personal use of Steroid (more than 5kg)",
+jailtime:"🔒 30",
+fine:3279,
+action:""
+},
+{
+code:"HSC 209",
+violation:"Smoking Violation",
+jailtime:"💸 TICKET",
+fine:1483,
+action:""
+},
+{
+code:"HSC 211",
+violation:"Open Container",
+jailtime:"🔒 15",
+fine:1406,
+action:""
+},
+
+{
+code:"PEN 102",
+violation:"(F)Evading Arrest",
+jailtime:"🔒 10",
+fine:1387,
+action:""
+},
+{
+code:"PEN 103",
+violation:"(F)Attempting to Flee/Elude Police",
+jailtime:"🔒 10",
+fine:1740,
+action:""
+},
+{
+code:"PEN 104",
+violation:"(F)Fleeing Traffic Stop",
+jailtime:"🔒 15",
+fine:2849,
+action:""
+},
+{
+code:"PEN 105",
+violation:"(F)Fleeing Police Resulting in Injury, Property Damage or Death",
+jailtime:"🔒 20",
+fine:3176,
+action:""
+},
+{
+code:"PEN 106",
+violation:"(F)Hit and Run (Victim Died)",
+jailtime:"🔒 25",
+fine:1910,
+action:""
+},
+{
+code:"PEN 107",
+violation:"(F)Hit and Run (Victim Injured)",
+jailtime:"🔒 25",
+fine:1658,
+action:""
+},
+{
+code:"PEN 108",
+violation:"(F)Hit and Run (No Injury)",
+jailtime:"🔒 25",
+fine:1589,
+action:""
+},
+{
+code:"PEN 123",
+violation:"(M)Driving Wrong Way",
+jailtime:"🔒 15",
+fine:2241,
+action:""
+},
+{
+code:"PEN 134",
+violation:"(M)Planting/Tampering Evidence",
+jailtime:"🔒 15",
+fine:2329,
+action:""
+},
+{
+code:"PEN 135",
+violation:"(M)Destroying/Concealing Evidence",
+jailtime:"🔒 35",
+fine:1533,
+action:""
+},
+{
+code:"PEN 137",
+violation:"(M)Witness Tampering",
+jailtime:"🔒 10",
+fine:648,
+action:""
+},
+{
+code:"PEN 138",
+violation:"(F)Harbouring Criminal",
+jailtime:"🔒 30",
+fine:2958,
+action:""
+},
+{
+code:"PEN 148",
+violation:"(M)Obstruction of Justice",
+jailtime:"🔒 15",
+fine:3943,
+action:""
+},
+{
+code:"PEN 182",
+violation:"(F)Conspiracy to Commit Murder",
+jailtime:"🔒 36",
+fine:2037,
+action:""
+},
+{
+code:"PEN 187",
+violation:"(F)Capital Murder",
+jailtime:"🔒 40",
+fine:2658,
+action:""
+},
+{
+code:"PEN 187(a)",
+violation:"(F)Aggravated Murder",
+jailtime:"🔒 50",
+fine:2810,
+action:""
+},
+{
+code:"PEN 187(b)",
+violation:"(F)Attempted Murder",
+jailtime:"🔒 30",
+fine:2271,
+action:""
+},
+{
+code:"PEN 192(a)",
+violation:"(F)Voluntary Manslaughter",
+jailtime:"🔒 25",
+fine:2245,
+action:""
+},
+{
+code:"PEN 192(b)",
+violation:"(F)Involuntary Manslaughter",
+jailtime:"🔒 25",
+fine:1622,
+action:""
+},
+{
+code:"PEN 192(c)",
+violation:"(F)Vehicular Manslaughter",
+jailtime:"🔒 25",
+fine:1965,
+action:""
+},
+{
+code:"PEN 200",
+violation:"Public Urination",
+jailtime:"🔒 10",
+fine:847,
+action:""
+},
+{
+code:"PEN 201(a)",
+violation:"(F)Driving While License Expired or Without Official Licenses",
+jailtime:"🔒 15",
+fine:1431,
+action:""
+},
+{
+code:"PEN 201(b)",
+violation:"(F)Flying While License Expired or Without Official Licenses",
+jailtime:"🔒 25",
+fine:1180,
+action:""
+},
+{
+code:"PEN 201(c)",
+violation:"(F)Driving Lorry While License Expired or Without Official Licenses",
+jailtime:"🔒 30",
+fine:1471,
+action:""
+},
+{
+code:"PEN 201(d)",
+violation:"(F)Driving Heavy Truck While License Expired or Without Official Licenses",
+jailtime:"🔒 30",
+fine:2657,
+action:""
+},
+{
+code:"PEN 201(e)",
+violation:"(F)Lorry Driving on Federal Road Without Permission",
+jailtime:"🔒 30",
+fine:3194,
+action:""
+},
+{
+code:"PEN 201(f)",
+violation:"(F)Driving While License Revoked",
+jailtime:"🔒 25",
+fine:975,
+action:""
+},
+{
+code:"PEN 201(g)",
+violation:"(F)Heavy Truck Driving Without Permission",
+jailtime:"🔒 25",
+fine:1480,
+action:""
+},
+{
+code:"PEN 202",
+violation:"Graffiti",
+jailtime:"💸 TICKET",
+fine:1345,
+action:""
+},
+{
+code:"PEN 203",
+violation:"Littering",
+jailtime:"💸 TICKET",
+fine:1349,
+action:""
+},
+{
+code:"PEN 204",
+violation:"Loitering",
+jailtime:"💸 TICKET",
+fine:601,
+action:""
+},
+{
+code:"PEN 205",
+violation:"Indecent Exposure",
+jailtime:"💸 TICKET",
+fine:630,
+action:""
+},
+{
+code:"PEN 206",
+violation:"Disturbing the Peace",
+jailtime:"🔒 15",
+fine:2290,
+action:""
+},
+{
+code:"PEN 207",
+violation:"Trespassing",
+jailtime:"🔒 30",
+fine:3195,
+action:""
+},
+{
+code:"PEN 207(a)",
+violation:"(F)Basic Kidnapping",
+jailtime:"🔒 30",
+fine:1944,
+action:""
+},
+{
+code:"PEN 209",
+violation:"Jaywalking",
+jailtime:"💸 TICKET",
+fine:939,
+action:""
+},
+{
+code:"PEN 210",
+violation:"(F)Armed Robbery",
+jailtime:"🔒 30",
+fine:2981,
+action:""
+},
+{
+code:"PEN 211",
+violation:"(F)Home Invasion Robbery",
+jailtime:"🔒 35",
+fine:2899,
+action:""
+},
+{
+code:"PEN 215(a)",
+violation:"(F)Car Jacking",
+jailtime:"🔒 25",
+fine:1992,
+action:""
+},
+{
+code:"PEN 240(a)",
+violation:"(M)Simple Assault",
+jailtime:"🔒 15",
+fine:2550,
+action:""
+},
+{
+code:"PEN 240(b)",
+violation:"(F)Aggravated Assault",
+jailtime:"🔒 25",
+fine:3674,
+action:""
+},
+{
+code:"PEN 240(c)",
+violation:"(M)Brawl in Public Peace",
+jailtime:"🔒 20",
+fine:550,
+action:""
+},
+{
+code:"PEN 242(a)",
+violation:"(M)Simple Battery",
+jailtime:"🔒 25",
+fine:2266,
+action:""
+},
+{
+code:"PEN 243",
+violation:"(M)Disrespected to Government",
+jailtime:"🔒 40",
+fine:3094,
+action:""
+},
+{
+code:"PEN 243(a)",
+violation:"(F)Assault on Police Officer",
+jailtime:"🔒 40",
+fine:3594,
+action:""
+},
+{
+code:"PEN 245(a)",
+violation:"(F)Assault With a Deadly Weapon",
+jailtime:"🔒 20",
+fine:3580,
+action:""
+},
+{
+code:"PEN 261",
+violation:"(F)Sexual Assault",
+jailtime:"🔒 25",
+fine:1868,
+action:""
+},
+{
+code:"PEN 261(a)",
+violation:"(F)Rape",
+jailtime:"🔒 20",
+fine:950,
+action:""
+},
+{
+code:"PEN 261(b)",
+violation:"(F)Attempted Rape",
+jailtime:"🔒 12",
+fine:975,
+action:""
+},
+{
+code:"PEN 261(c)",
+violation:"(F)Sexual Battery",
+jailtime:"🔒 30",
+fine:2688,
+action:""
+},
+{
+code:"PEN 301",
+violation:"(M)Possession of Marijuana",
+jailtime:"🔒 25",
+fine:2116,
+action:""
+},
+{
+code:"PEN 302",
+violation:"(F)Possession of Cocaine",
+jailtime:"🔒 25",
+fine:2231,
+action:""
+},
+{
+code:"PEN 316",
+violation:"(F)Possession of Steroids",
+jailtime:"🔒 25",
+fine:1408,
+action:""
+},
+{
+code:"PEN 352(a)",
+violation:"(F)Drug Trafficking (Schedule I)",
+jailtime:"🔒 25",
+fine:2457,
+action:""
+},
+{
+code:"PEN 352(b)",
+violation:"(F)Drug Trafficking (Schedule II)",
+jailtime:"🔒 30",
+fine:3459,
+action:""
+},
+{
+code:"PEN 352(c)",
+violation:"(F)Drug Trafficking (Schedule III)",
+jailtime:"🔒 35",
+fine:2137,
+action:""
+},
+{
+code:"PEN 352(d)",
+violation:"(F)Drug Trafficking (Schedule IV)",
+jailtime:"🔒 40",
+fine:2810,
+action:""
+},
+{
+code:"PEN 353",
+violation:"Drug Manufacturing and Distribution",
+jailtime:"🔒 15",
+fine:2000,
+action:""
+},
+{
+code:"PEN 405",
+violation:"(F)Mayhem with Violence",
+jailtime:"🔒 15",
+fine:1718,
+action:""
+},
+{
+code:"PEN 406",
+violation:"(F)Committed a Group Criminal Assault with or Without Weapons",
+jailtime:"🔒 30",
+fine:5193,
+action:""
+},
+{
+code:"PEN 407",
+violation:"(F)Engaging in Violent Protest",
+jailtime:"🔒 25",
+fine:2331,
+action:""
+},
+{
+code:"PEN 408",
+violation:"(F)Participating in Violent Protest",
+jailtime:"🔒 25",
+fine:2159,
+action:""
+},
+{
+code:"PEN 410",
+violation:"(F)Unlawful Assembly",
+jailtime:"🔒 25",
+fine:2366,
+action:""
+},
+{
+code:"PEN 411",
+violation:"(F)Inciting Riot",
+jailtime:"🔒 30",
+fine:3470,
+action:""
+},
+{
+code:"PEN 412",
+violation:"(F)Participating in Riot",
+jailtime:"🔒 25",
+fine:1687,
+action:""
+},
+{
+code:"PEN 413",
+violation:"(F)Resisting Arrest with Violence",
+jailtime:"🔒 25",
+fine:1636,
+action:""
+},
+{
+code:"PEN 413(M)",
+violation:"Organizing a Big/Small Illegal Event",
+jailtime:"🔒 25",
+fine:7500,
+action:""
+},
+{
+code:"PEN 414",
+violation:"(M)Failure to Obtain a Permit",
+jailtime:"🔒 15",
+fine:2500,
+action:""
+},
+{
+code:"PEN 451",
+violation:"(F)Attempted Arson",
+jailtime:"🔒 25",
+fine:943,
+action:""
+},
+{
+code:"PEN 451(a)",
+violation:"(F)Arson",
+jailtime:"🔒 25",
+fine:2217,
+action:""
+},
+{
+code:"PEN 456",
+violation:"(M)Reckless Driving and Endangerment",
+jailtime:"🔒 25",
+fine:3210,
+action:""
+},
+{
+code:"PEN 459",
+violation:"(F)Burglary",
+jailtime:"🔒 50",
+fine:3272,
+action:""
+},
+{
+code:"PEN 459(a)",
+violation:"(M)Shoplifting",
+jailtime:"🔒 25",
+fine:2141,
+action:""
+},
+{
+code:"PEN 463(a)",
+violation:"(M)Looting",
+jailtime:"🔒 15",
+fine:2164,
+action:""
+},
+{
+code:"PEN 484",
+violation:"(F)Attempted Car Theft",
+jailtime:"🔒 25",
+fine:1803,
+action:""
+},
+{
+code:"PEN 484(a)",
+violation:"(F)Grand Theft Auto",
+jailtime:"🔒 25",
+fine:953,
+action:""
+},
+{
+code:"PEN 488",
+violation:"(M)Petty Theft",
+jailtime:"🔒 25",
+fine:1697,
+action:""
+},
+{
+code:"PEN 490(a)",
+violation:"(M)Retail Theft",
+jailtime:"🔒 25",
+fine:1603,
+action:""
+},
+{
+code:"PEN 496",
+violation:"(F)Illegal Possession of Firearm",
+jailtime:"🔒 25",
+fine:2971,
+action:""
+},
+{
+code:"PEN 496(a)",
+violation:"(F)Possession of a Stolen Vehicle",
+jailtime:"🔒 15",
+fine:1548,
+action:""
+},
+{
+code:"PEN 496(b)",
+violation:"(F)Possession of Stolen Government Property",
+jailtime:"🔒 15",
+fine:1594,
+action:""
+},
+{
+code:"PEN 496(c)",
+violation:"(M)Possession of Stolen Driver's License or ID",
+jailtime:"🔒 25",
+fine:2328,
+action:""
+},
+{
+code:"PEN 496(d)",
+violation:"(F)Brandishing a Firearm or Weapon",
+jailtime:"🔒 10",
+fine:3650,
+action:""
+},
+{
+code:"PEN 496(e)",
+violation:"(F)Illegal Firearm Schematic/Blueprint and Material",
+jailtime:"🔒 25",
+fine:2347,
+action:""
+},
+{
+code:"PEN 496(f)",
+violation:"(M)Concealing Identity",
+jailtime:"🔒 25",
+fine:550,
+action:""
+},
+{
+code:"PEN 496(g)",
+violation:"(F)Illegal Possession of Blunt Weapon",
+jailtime:"🔒 25",
+fine:2971,
+action:""
+},
+{
+code:"PEN 497",
+violation:"(F)Illegal Possession of Firearm by Felon",
+jailtime:"🔒 30",
+fine:3085,
+action:""
+},
+{
+code:"PEN 497(a)",
+violation:"(F)Possession of Stolen Property",
+jailtime:"🔒 15",
+fine:1841,
+action:""
+},
+{
+code:"PEN 500",
+violation:"(F)Possession of Firearm (Serial Tampered)",
+jailtime:"🔒 20",
+fine:1178,
+action:""
+},
+{
+code:"PEN 501",
+violation:"(F)Possession of Firearm (Illegal Discharge)",
+jailtime:"🔒 25",
+fine:1977,
+action:""
+},
+{
+code:"PEN 502",
+violation:"(F)Possession of Firearm (Stolen)",
+jailtime:"🔒 25",
+fine:1685,
+action:""
+},
+{
+code:"PEN 503",
+violation:"(F)Arms Trafficking",
+jailtime:"🔒 20",
+fine:1117,
+action:""
+},
+{
+code:"PEN 594",
+violation:"(M)Destruction of Public Property",
+jailtime:"🔒 25",
+fine:1755,
+action:""
+},
+{
+code:"PEN 594",
+violation:"(M)Vandalism of Public Property",
+jailtime:"🔒 25",
+fine:1251,
+action:""
+},
+{
+code:"PEN 594(a)",
+violation:"(M)Destruction of Private Property",
+jailtime:"🔒 25",
+fine:2255,
+action:""
+},
+{
+code:"PEN 594(a)",
+violation:"(M)Vandalism of Private Property",
+jailtime:"🔒 25",
+fine:2477,
+action:""
+},
+{
+code:"PEN 594(b)",
+violation:"(F)Tampering with Property Leading to Injury/Death",
+jailtime:"🔒 25",
+fine:1525,
+action:""
+},
+{
+code:"PEN 594(b)",
+violation:"(M)Vandalism of Government Property",
+jailtime:"🔒 25",
+fine:1942,
+action:""
+},
+{
+code:"PEN 597",
+violation:"(M)Animal Cruelty",
+jailtime:"🔒 25",
+fine:1286,
+action:""
+},
+{
+code:"PEN 625(b)",
+violation:"(M)Mischief",
+jailtime:"🔒 25",
+fine:2248,
+action:""
+},
+{
+code:"PEN 647",
+violation:"(M)Prowling",
+jailtime:"🔒 25",
+fine:957,
+action:""
+},
+{
+code:"PEN 664",
+violation:"(F)Attempted Murder of Police Officer",
+jailtime:"🔒 25",
+fine:3814,
+action:""
+},
+{
+code:"PEN 664(a)",
+violation:"(F)Performing Drive-by to LEO/Citizen",
+jailtime:"🔒 25",
+fine:910,
+action:""
+},
+{
+code:"PEN 665",
+violation:"(F)Murder of Police Officer",
+jailtime:"🔒 60",
+fine:5214,
+action:""
+},
+{
+code:"PEN 711",
+violation:"(F)Fraud",
+jailtime:"🔒 25",
+fine:2396,
+action:""
+},
+{
+code:"PEN 713",
+violation:"(M)Bribery",
+jailtime:"🔒 25",
+fine:1016,
+action:""
+},
+{
+code:"PEN 715",
+violation:"(F)Money Laundering",
+jailtime:"🔒 25",
+fine:957,
+action:""
+},
+{
+code:"PEN 717",
+violation:"(F)Identity Theft",
+jailtime:"🔒 25",
+fine:1401,
+action:""
+},
+{
+code:"PEN 719",
+violation:"(M)Drunk in Public",
+jailtime:"🔒 15",
+fine:2260,
+action:""
+},
+{
+code:"PEN 719(a)",
+violation:"DUI (Driving Under the Influence)",
+jailtime:"🔒 15",
+fine:2118,
+action:""
+},
+{
+code:"PEN 719(b)",
+violation:"DWI (Driving While Intoxicated)",
+jailtime:"🔒 15",
+fine:2082,
+action:""
+},
+{
+code:"PEN 721",
+violation:"(F)Drugs in Public",
+jailtime:"🔒 25",
+fine:1808,
+action:""
+},
+{
+code:"PEN 723",
+violation:"(M)Open Container in Public",
+jailtime:"🔒 25",
+fine:2089,
+action:""
+},
+{
+code:"PEN 725",
+violation:"(M)Indecent Exposure",
+jailtime:"🔒 25",
+fine:907,
+action:""
+},
+{
+code:"PEN 727",
+violation:"(M)Disorderly Conduct",
+jailtime:"🔒 25",
+fine:832,
+action:""
+},
+{
+code:"PEN 729",
+violation:"(F)Impersonating a Police Officer",
+jailtime:"🔒 25",
+fine:1693,
+action:""
+},
+{
+code:"PEN 731",
+violation:"(M)Harassment",
+jailtime:"🔒 25",
+fine:1958,
+action:""
+},
+{
+code:"PEN 733",
+violation:"(M)Making Terroristic Threats",
+jailtime:"🔒 25",
+fine:2094,
+action:""
+},
+{
+code:"PEN 735",
+violation:"(M)Providing Fake Name/ID to Police",
+jailtime:"🔒 15",
+fine:2201,
+action:""
+},
+{
+code:"PEN 737",
+violation:"(F)Assisting in Suicide",
+jailtime:"🔒 25",
+fine:1730,
+action:""
+},
+{
+code:"PEN 739",
+violation:"(M)Illegal Broadcasting",
+jailtime:"🔒 25",
+fine:1895,
+action:""
+},
+{
+code:"PEN 741",
+violation:"(M)Misuse of Government Line",
+jailtime:"🔒 25",
+fine:1104,
+action:""
+},
+{
+code:"PEN 743",
+violation:"(M)Failure/Refusing to Pay Bar/Hotel Tab",
+jailtime:"🔒 25",
+fine:1211,
+action:""
+},
+{
+code:"PEN 747",
+violation:"(F)Soliciting Prostitution",
+jailtime:"🔒 25",
+fine:1592,
+action:""
+},
+{
+code:"PEN 749",
+violation:"(F)Prostitution",
+jailtime:"🔒 25",
+fine:1862,
+action:""
+},
+{
+code:"PEN 751",
+violation:"(F)Probation Violation",
+jailtime:"🔒 25",
+fine:1007,
+action:""
+},
+{
+code:"PEN 753",
+violation:"(F)Parole Violation",
+jailtime:"🔒 25",
+fine:1895,
+action:""
+},
+{
+code:"PEN 755",
+violation:"(F)Possession of Child Pornography",
+jailtime:"🔒 25",
+fine:1531,
+action:""
+},
+{
+code:"PEN 757",
+violation:"(M)Possession of Burglary Tools",
+jailtime:"🔒 25",
+fine:806,
+action:""
+},
+{
+code:"PEN 759",
+violation:"(F)Trafficking Illegal/Undocumented Immigrants",
+jailtime:"🔒 25",
+fine:1938,
+action:""
+},
+{
+code:"PEN 761",
+violation:"(F)Human Trafficking",
+jailtime:"🔒 25",
+fine:1682,
+action:""
+},
+{
+code:"PEN 789",
+violation:"(M)Street Racing",
+jailtime:"🔒 25",
+fine:1454,
+action:""
+},
+{
+code:"VEH 100",
+violation:"Speeding (Under 10)",
+jailtime:"💸 TICKET",
+fine:1138,
+action:""
+},
+{
+code:"VEH 101(a)",
+violation:"Speeding (Between 10-15)",
+jailtime:"💸 TICKET",
+fine:758,
+action:""
+},
+{
+code:"VEH 101(b)",
+violation:"Speeding (Between 16-30)",
+jailtime:"💸 TICKET",
+fine:653,
+action:""
+},
+{
+code:"VEH 103",
+violation:"Speeding (Over 30+)",
+jailtime:"🚓 IMPOUND",
+fine:1228,
+action:""
+},
+{
+code:"VEH 104",
+violation:"Racing on Highway",
+jailtime:"🚓 IMPOUND",
+fine:1092,
+action:""
+},
+{
+code:"VEH 105",
+violation:"Improper Lane Change",
+jailtime:"💸 TICKET",
+fine:1150,
+action:""
+},
+{
+code:"VEH 106",
+violation:"Improper Passing",
+jailtime:"💸 TICKET",
+fine:803,
+action:""
+},
+{
+code:"VEH 107",
+violation:"Improper Turn",
+jailtime:"💸 TICKET",
+fine:1171,
+action:""
+},
+{
+code:"VEH 108",
+violation:"Improper U-Turn",
+jailtime:"💸 TICKET",
+fine:589,
+action:""
+},
+{
+code:"VEH 109",
+violation:"Violation of Right of Way",
+jailtime:"💸 TICKET",
+fine:1277,
+action:""
+},
+{
+code:"VEH 110",
+violation:"Careless Driving",
+jailtime:"💸 TICKET",
+fine:1430,
+action:""
+},
+{
+code:"VEH 111",
+violation:"Following Too Closely",
+jailtime:"💸 TICKET",
+fine:785,
+action:""
+},
+{
+code:"VEH 112",
+violation:"Failure to Signal",
+jailtime:"💸 TICKET",
+fine:978,
+action:""
+},
+{
+code:"VEH 113",
+violation:"Failure to Yield",
+jailtime:"💸 TICKET",
+fine:1001,
+action:""
+},
+{
+code:"VEH 114",
+violation:"Failure to Yield to Emergency Vehicle",
+jailtime:"💸 TICKET",
+fine:1255,
+action:""
+},
+{
+code:"VEH 115",
+violation:"Impeding Flow of Traffic",
+jailtime:"💸 TICKET",
+fine:1383,
+action:""
+},
+{
+code:"VEH 116",
+violation:"At Fault in an Accident",
+jailtime:"🚓 IMPOUND",
+fine:1429,
+action:""
+},
+{
+code:"VEH 117",
+violation:"Failure to Stop at Traffic Signal",
+jailtime:"💸 TICKET",
+fine:586,
+action:""
+},
+{
+code:"VEH 117(a)",
+violation:"Failure/Refusing to Pay Ticket",
+jailtime:"🔒 15",
+fine:633,
+action:""
+},
+{
+code:"VEH 118",
+violation:"Running Stop Sign",
+jailtime:"💸 TICKET",
+fine:1118,
+action:""
+},
+{
+code:"VEH 119",
+violation:"Crossing Center Divider",
+jailtime:"💸 TICKET",
+fine:963,
+action:""
+},
+{
+code:"VEH 120",
+violation:"Driving on Shoulder",
+jailtime:"💸 TICKET",
+fine:1278,
+action:""
+},
+{
+code:"VEH 121",
+violation:"Failure to Secure Truck Load",
+jailtime:"💸 TICKET",
+fine:898,
+action:""
+},
+{
+code:"VEH 122",
+violation:"Motorcycle Without Helmet",
+jailtime:"💸 TICKET",
+fine:1196,
+action:""
+},
+{
+code:"VEH 123",
+violation:"Using Phone While Driving",
+jailtime:"💸 TICKET",
+fine:1271,
+action:""
+},
+{
+code:"VEH 124",
+violation:"Excessive Acceleration",
+jailtime:"💸 TICKET",
+fine:1135,
+action:""
+},
+{
+code:"VEH 125",
+violation:"Bicycle on Roadway",
+jailtime:"💸 TICKET",
+fine:904,
+action:""
+},
+{
+code:"VEH 126",
+violation:"Driving in Bicycle Lane",
+jailtime:"💸 TICKET",
+fine:589,
+action:""
+},
+{
+code:"VEH 210",
+violation:"Illegal Camping",
+jailtime:"💸 TICKET",
+fine:918,
+action:""
+},
+{
+code:"VEH 225",
+violation:"Blocking Driveway/Crosswalk",
+jailtime:"🚓 IMPOUND",
+fine:2500,
+action:""
+},
+{
+code:"VEH 280",
+violation:"Improper Lighting",
+jailtime:"💸 TICKET",
+fine:587,
+action:""
+},
+{
+code:"VEH 380",
+violation:"Impersonating Government Vehicle",
+jailtime:"🚓 IMPOUND",
+fine:2500,
+action:""
+},
+{
+code:"VEH 460",
+violation:"Driving Wrong Way",
+jailtime:"💸 TICKET",
+fine:950,
+action:""
+},
+{
+code:"VEH 520",
+violation:"License Plate Display Failure",
+jailtime:"🚓 IMPOUND",
+fine:1231,
+action:""
+},
+{
+code:"VEH 521",
+violation:"Unregistered Vehicle",
+jailtime:"🚓 IMPOUND",
+fine:1000,
+action:""
+}
+];
+
+const tbody=document.getElementById("tbody");
+const search=document.getElementById("search");
+const category=document.getElementById("category");
+
+function badge(type){
+
+if(type.includes("TICKET")){
+return `<span class="badge ticket">${type}</span>`;
+}
+
+if(type.includes("IMPOUND")){
+return `<span class="badge impound">${type}</span>`;
+}
+
+return `<span class="badge jail">${type}</span>`;
+
+}
+
+function copyCode(code){
+
+navigator.clipboard.writeText(code);
+
+alert("Copied : "+code);
+
+}
+
+function render(){
+
+const keyword=search.value.toLowerCase();
+
+const cat=category.value;
+
+tbody.innerHTML="";
+
+const result=data.filter(item=>{
+
+const matchSearch=
+
+item.code.toLowerCase().includes(keyword) ||
+
+item.violation.toLowerCase().includes(keyword) ||
+
+item.jailtime.toLowerCase().includes(keyword) ||
+
+String(item.fine).includes(keyword);
+
+const matchCategory=
+
+cat==="ALL" ||
+
+item.code.startsWith(cat);
+
+return matchSearch && matchCategory;
+
+});
+
+result.forEach(item=>{
+
+tbody.innerHTML+=`
+
+<tr>
+
+<td>${item.code}</td>
+
+<td>${item.violation}</td>
+
+<td>${badge(item.jailtime)}</td>
+
+<td>$${item.fine.toLocaleString()}</td>
+
+<td>
+
+<button class="copy"
+
+onclick="copyCode('${item.code}')">
+
+Copy
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+search.addEventListener("keyup",render);
+
+category.addEventListener("change",render);
+
+render();
+
+</script>
+
+</body>
+
+</html>
