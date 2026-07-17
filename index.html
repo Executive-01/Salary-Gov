@@ -242,6 +242,11 @@ type="number"
 id="duty"
 placeholder="Duty Time (Menit)">
 
+<label style="display:flex;align-items:center;gap:10px;margin-bottom:15px;">
+    <input type="checkbox" id="afk" style="width:20px;height:20px;">
+    AFK System
+</label>
+
 <div class="button-grid">
 
 <button class="hitung" onclick="bukaLogin()">💼 Hitung Gaji</button>
@@ -429,6 +434,68 @@ tunjangan=5000;
 
 let total=gaji+tunjangan;
 
+// =====================
+// AFK SYSTEM
+// =====================
+
+let afk = document.getElementById("afk").checked;
+
+let potonganPersen = 0;
+
+if(afk){
+
+    if(duty>=1000){
+
+        potonganPersen=5;
+
+    }else if(duty>=900){
+
+        potonganPersen=15;
+
+    }else if(duty>=800){
+
+        potonganPersen=25;
+
+    }else if(duty>=700){
+
+        potonganPersen=35;
+
+    }else if(duty>=600){
+
+        potonganPersen=45;
+
+    }else if(duty>=500){
+
+        potonganPersen=55;
+
+    }else if(duty>=400){
+
+        potonganPersen=65;
+
+    }else if(duty>=300){
+
+        potonganPersen=75;
+
+    }else if(duty>=200){
+
+        potonganPersen=85;
+
+    }else if(duty>=100){
+
+        potonganPersen=95;
+
+    }else{
+
+        potonganPersen=100;
+
+    }
+
+    let potonganNominal = total * (potonganPersen/100);
+
+    total -= potonganNominal;
+
+}
+
 let output="```=== Salary ===```\n\n";
 
 output+="```\n";
@@ -448,9 +515,22 @@ output+=`- Tunjangan Makan, Minum, Kesehatan & Bensin ${uang(tunjangan)}
 
 }
 
-output+=`
+if(afk){
+
+    output+=`
+- Potongan AFK ${potonganPersen}%`;
+
+    output+=`
 Total Gaji : ${uang(total)}
 `;
+
+}else{
+
+    output+=`
+Total Gaji : ${uang(total)}
+`;
+
+}
 
 output+="```";
 
