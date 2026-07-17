@@ -249,7 +249,7 @@ placeholder="Duty Time (Menit)">
 
 <div class="button-grid">
 
-<button class="hitung" onclick="bukaLogin()">💼 Hitung Gaji</button>
+<button class="hitung" onclick="hitung()">💼 Hitung Gaji</button>
 
 <button class="salin" onclick="salinOutput()">📋 Salin Output</button>
 
@@ -419,10 +419,6 @@ tunjangan=5000;
 
 let total=gaji+tunjangan;
 
-// =====================
-// AFK SYSTEM
-// =====================
-
 let afk = document.getElementById("afk").checked;
 
 let potonganPersen = 0;
@@ -527,10 +523,6 @@ simpanRiwayat(nama,rankNama,duty,total);
 
 }
 
-// ======================================
-// LOCAL STORAGE RIWAYAT
-// ======================================
-
 function simpanRiwayat(nama, rank, duty, total){
 
     let data = JSON.parse(localStorage.getItem("salaryHistory")) || [];
@@ -547,10 +539,6 @@ function simpanRiwayat(nama, rank, duty, total){
     localStorage.setItem("salaryHistory", JSON.stringify(data));
 
 }
-
-// ======================================
-// TAMPILKAN RIWAYAT
-// ======================================
 
 function toggleRiwayat(){
 
@@ -621,10 +609,6 @@ function toggleRiwayat(){
 
 }
 
-// ======================================
-// HAPUS RIWAYAT
-// ======================================
-
 function hapusRiwayat(){
 
     if(confirm("Hapus seluruh riwayat?")){
@@ -637,9 +621,6 @@ function hapusRiwayat(){
 
 }
 
-// ======================================
-// SALIN OUTPUT
-// ======================================
 
 function salinOutput(){
 
@@ -668,10 +649,6 @@ function salinOutput(){
     alert("Output berhasil disalin.");
 
 }
-
-// ======================================
-// CEK SALARY
-// ======================================
 
 function cekSalary(){
 
@@ -711,10 +688,6 @@ function cekSalary(){
 
 }
 
-// ======================================
-// TUTUP PANEL SAAT MEMBUKA PANEL LAIN
-// ======================================
-
 function tutupPanel(){
 
     document.getElementById("riwayat").style.display="none";
@@ -722,10 +695,6 @@ function tutupPanel(){
     document.getElementById("salaryList").style.display="none";
 
 }
-
-// ======================================
-// AGAR PANEL TIDAK BERSAMAAN
-// ======================================
 
 const tombolRiwayat=document.querySelector(".riwayat");
 
@@ -747,45 +716,6 @@ tombolSalary.onclick=function(){
 
 }
 
-const USERNAME = "GOV";
-const PASSWORD = "State26";
-
-function bukaLogin(){
-
-    document.getElementById("loginModal").style.display="block";
-
-}
-
-function tutupLogin(){
-
-    document.getElementById("loginModal").style.display="none";
-
-}
-
-function login(){
-
-    let user = document.getElementById("username").value.trim();
-    let pass = document.getElementById("password").value;
-
-    if(user === USERNAME && pass === PASSWORD){
-
-        document.getElementById("loginModal").style.display="none";
-
-        hitung();
-
-    }else{
-
-        alert("Username atau Password salah.");
-
-    }
-
-}
-
-
-// ======================================
-// ENTER = HITUNG GAJI
-// ======================================
-
 document.addEventListener("keydown",function(e){
 
     if(e.key==="Enter"){
@@ -795,10 +725,6 @@ document.addEventListener("keydown",function(e){
     }
 
 });
-
-// ======================================
-// LOAD DATA
-// ======================================
 
 window.onload=function(){
 
